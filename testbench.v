@@ -10,9 +10,7 @@ module testbench;
     wire [7:0] led;
     wire [6:0] lseg;
     wire [6:0] hseg;
-    wire spi_mosi;
-    wire spi_clk;
-    wire spi_cs;
+    wire [7:0] do;
 
     // Генерация тактового сигнала (1 МГц)
     always #1 clk = ~clk; // Период 2 мкс → частота 500 кГц
@@ -24,13 +22,11 @@ module testbench;
         .led(led),
         .lseg(lseg),
         .hseg(hseg),
-        .spi_mosi(spi_mosi),
-        .spi_clk(spi_clk),
-        .spi_cs(spi_cs)
+        .do(do)
     );
 
     initial begin
-        $dumpfile("dump.vcd"); // <-- ОБЯЗАТЕЛЬНО
+        $dumpfile("dump.vcd"); 
         $dumpvars(0, testbench); // Записываем все сигналы
 
         $display("Test started...");
@@ -40,7 +36,7 @@ module testbench;
         #5;
         reset_n = 1;
 
-        // Имитируем работу ~1000 тактов (примерно 2 мс)
+        // Имитируем работу ~1000 тактов 
         #2000;
 
         $display("Test finished.");

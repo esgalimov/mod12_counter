@@ -2,8 +2,12 @@
 NET "clk" TNM_NET = clk;
 TIMESPEC TS_clk = PERIOD "clk" 250 ns HIGH 50%;
 
-NET "clk" LOC = "P18" ;
-NET "reset_n" LOC = "P22" ;
+NET "clk" LOC = "P18";
+NET "reset_n" LOC = "P22";
+
+# or for work from button change for:
+# NET "clk" LOC = "P22";
+# NET "reset_n" LOC = "P120"
 
 NET "led[7]" LOC = "P85" ;
 NET "led[6]" LOC = "P84" ;
@@ -32,6 +36,12 @@ NET "hseg[4]" LOC = "P41";
 NET "hseg[5]" LOC = "P56";
 NET "hseg[6]" LOC = "P58";
 
-NET "spi_mosi" LOC = "P59";
-NET "spi_clk" LOC = "P60";
-NET "spi_cs" LOC = "P62";
+
+NET "do[0]" LOC = "P59";
+NET "do[1]" LOC = "P60";
+NET "do[2]" LOC = "P62";
+NET "do[3]" LOC = "P63";
+NET "do[4]" LOC = "P65";
+NET "do[5]" LOC = "P66";
+NET "do[6]" LOC = "P67";
+NET "do[7]" LOC = "P74";
