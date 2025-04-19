@@ -8,8 +8,8 @@ module testbench;
 
     // Интерфейсы верхнего уровня
     wire [7:0] led;
-    wire [6:0] seg;
-    wire [1:0] digit;
+    wire [6:0] lseg;
+    wire [6:0] hseg;
     wire spi_mosi;
     wire spi_clk;
     wire spi_cs;
@@ -22,8 +22,8 @@ module testbench;
         .clk(clk),
         .reset_n(reset_n),
         .led(led),
-        .seg(seg),
-        .digit(digit),
+        .lseg(lseg),
+        .hseg(hseg),
         .spi_mosi(spi_mosi),
         .spi_clk(spi_clk),
         .spi_cs(spi_cs)

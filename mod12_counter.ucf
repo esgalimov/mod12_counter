@@ -14,16 +14,23 @@ NET "led[2]" LOC = "P77" ;
 NET "led[1]" LOC = "P76" ;
 NET "led[0]" LOC = "P75" ;
 
-NET "seg[0]" LOC = "P49";  # a (low)
-NET "seg[1]" LOC = "P51";  # b
-NET "seg[2]" LOC = "P47";  # c
-NET "seg[3]" LOC = "P44";  # d
-NET "seg[4]" LOC = "P46";  # e
-NET "seg[5]" LOC = "P50";  # f
-NET "seg[6]" LOC = "P48";  # g
 
-NET "digit[0]" LOC = "P136";
-NET "digit[1]" LOC = "P137";
+NET "lseg[0]" LOC = "P49";  # a (low)
+NET "lseg[1]" LOC = "P51";  # b
+NET "lseg[2]" LOC = "P47";  # c
+NET "lseg[3]" LOC = "P44";  # d
+NET "lseg[4]" LOC = "P46";  # e
+NET "lseg[5]" LOC = "P50";  # f
+NET "lseg[6]" LOC = "P48";  # g
+
+
+NET "hseg[0]" LOC = "P57";
+NET "hseg[1]" LOC = "P54";
+NET "hseg[2]" LOC = "P40";
+NET "hseg[3]" LOC = "P43";
+NET "hseg[4]" LOC = "P41";
+NET "hseg[5]" LOC = "P56";
+NET "hseg[6]" LOC = "P58";
 
 NET "spi_mosi" LOC = "P59";
 NET "spi_clk" LOC = "P60";

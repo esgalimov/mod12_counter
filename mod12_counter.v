@@ -5,8 +5,8 @@ module top (
     input wire clk,
     input wire reset_n,
     output wire [7:0] led,
-    output wire [6:0] seg,
-    output wire [1:0] digit,
+    output wire [6:0] lseg,
+    output wire [6:0] hseg,
     output wire spi_mosi,
     output wire spi_clk,
     output wire spi_cs
@@ -25,12 +25,12 @@ module top (
 
     assign led = {4'b0, count};
 
-    seg7_mux seg7_inst (
+    seg7 seg7_inst (
         .clk(clk),
         .reset(reset),
         .value(count),
-        .seg(seg),
-        .digit(digit)
+        .lseg(lseg),
+        .hseg(hseg)
     );
 
     spi_dac dac_inst (
@@ -70,65 +70,38 @@ endmodule
 // =======================================================
 // МУЛЬТИПЛЕКСОР ДЛЯ 7-СЕГМЕНТНОГО ИНДИКАТОРА (2 РАЗРЯДА)
 // =======================================================
-module seg7_mux(
+module seg7(
     input wire clk,
     input wire reset,
     input wire [3:0] value,
-    output reg [6:0] seg,
-    output reg [1:0] digit
+    output reg [6:0] lseg,
+    output reg [6:0] hseg
 );
 
-    reg toggle;
-    reg [3:0] digit_lo, digit_hi;
-    wire [6:0] seg_lo, seg_hi;
+    reg [3:0] ones, tens;
 
     always @(*) begin
-        digit_lo = value % 10;
-        digit_hi = value / 10;
-    end
+        ones = value % 10;
+        tens = value / 10;
 
-    bcd_to_7seg bcd_lo (.bcd(digit_lo), .seg(seg_lo));
-    bcd_to_7seg bcd_hi (.bcd(digit_hi), .seg(seg_hi));
+        case (ones)                     // hex       maybe (invert)
+            4'd0: lseg = 7'b1000000;    // 40            011 1111
+            4'd1: lseg = 7'b1111001;    // 79            000 0110
+            4'd2: lseg = 7'b0100100;    // 24            101 1011
+            4'd3: lseg = 7'b0110000;    // 30            100 1111
+            4'd4: lseg = 7'b0011001;    // 19            110 0110
+            4'd5: lseg = 7'b0010010;    // 12            110 1101
+            4'd6: lseg = 7'b0000010;    // 02            111 1101
+            4'd7: lseg = 7'b1111000;    // 78            000 0111
+            4'd8: lseg = 7'b0000000;    // 00            111 1111
+            4'd9: lseg = 7'b0010000;    // 10            110 1111
+            default: lseg = 7'b1111111; // 7F            000 0000
+        endcase
 
-    always @(posedge clk or posedge reset) begin
-        if (reset)
-            toggle <= 0;
-        else
-            toggle <= ~toggle;
-    end
-
-    always @(*) begin
-        if (toggle) begin
-            seg = seg_hi;
-            digit = 2'b10;
-        end else begin
-            seg = seg_lo;
-            digit = 2'b01;
-        end
-    end
-endmodule
-
-
-// =======================================================
-// ПРЕОБРАЗОВАТЕЛЬ BCD -> 7-СЕГМЕНТНЫЙ КОД
-// =======================================================
-module bcd_to_7seg (
-    input wire [3:0] bcd,
-    output reg [6:0] seg
-);
-    always @(*) begin
-        case (bcd)
-            4'd0: seg = 7'b0111111; 
-            4'd1: seg = 7'b0000110;
-            4'd2: seg = 7'b1011011;
-            4'd3: seg = 7'b1001111;
-            4'd4: seg = 7'b1100110;
-            4'd5: seg = 7'b1101101;
-            4'd6: seg = 7'b1111101;
-            4'd7: seg = 7'b0000111;
-            4'd8: seg = 7'b1111111;
-            4'd9: seg = 7'b1101111;
-            default: seg = 7'b0000000;
+        case (tens)
+            4'd0: hseg = 7'b1000000;    // 0111111
+            4'd1: hseg = 7'b1111001;    // 0000110
+            default: hseg = 7'b1111111; // 0000000
         endcase
     end
 endmodule
