@@ -1,4 +1,4 @@
-`timescale 1 us / 100 ns
+`timescale 1 us / 100 ns //need to fix
 
 module testbench;
 

@@ -13,11 +13,13 @@ module top (
 );
 
     wire reset = ~reset_n;
+	 reg clk_d;
+	 reg [23:0] cnt_d;
     wire [3:0] count;
     wire carry;
 
     counter12 counter_inst (
-        .clk(clk),
+        .clk(clk_d),
         .reset(reset),
         .count(count),
         .carry(carry)
@@ -26,9 +28,20 @@ module top (
     assign led = {4'b0, count};
 
     assign do = count; // DAC
+	 
+	 //Divide freq
+	 
+	 always @(posedge clk) begin
+			if (cnt_d == 4000000) begin
+				clk_d <= ~clk_d;
+				cnt_d <= 0;
+			end else begin
+				cnt_d <= cnt_d + 1;
+			end
+	 end
 
     seg7 seg7_inst (
-        .clk(clk),
+        .clk(clk_d),
         .reset(reset),
         .value(count),
         .lseg(lseg),

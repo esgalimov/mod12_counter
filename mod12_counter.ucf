@@ -5,18 +5,15 @@ TIMESPEC TS_clk = PERIOD "clk" 250 ns HIGH 50%;
 NET "clk" LOC = "P18";
 NET "reset_n" LOC = "P22";
 
-# or for work from button change for:
-# NET "clk" LOC = "P22";
-# NET "reset_n" LOC = "P120"
 
-NET "led[7]" LOC = "P85" ;
-NET "led[6]" LOC = "P84" ;
-NET "led[5]" LOC = "P83" ;
-NET "led[4]" LOC = "P80" ;
-NET "led[3]" LOC = "P79" ;
-NET "led[2]" LOC = "P77" ;
-NET "led[1]" LOC = "P76" ;
-NET "led[0]" LOC = "P75" ;
+NET "led[0]" LOC = "P85" ;
+NET "led[1]" LOC = "P84" ;
+NET "led[2]" LOC = "P83" ;
+NET "led[3]" LOC = "P80" ;
+NET "led[4]" LOC = "P79" ;
+NET "led[5]" LOC = "P77" ;
+NET "led[6]" LOC = "P76" ;
+NET "led[7]" LOC = "P75" ;
 
 
 NET "lseg[0]" LOC = "P49";  # a (low)
@@ -37,11 +34,11 @@ NET "hseg[5]" LOC = "P56";
 NET "hseg[6]" LOC = "P58";
 
 
-NET "do[0]" LOC = "P59";
-NET "do[1]" LOC = "P60";
-NET "do[2]" LOC = "P62";
-NET "do[3]" LOC = "P63";
-NET "do[4]" LOC = "P65";
-NET "do[5]" LOC = "P66";
-NET "do[6]" LOC = "P67";
-NET "do[7]" LOC = "P74";
+NET "do[7]" LOC = "P59";
+NET "do[6]" LOC = "P60";
+NET "do[5]" LOC = "P62";
+NET "do[4]" LOC = "P63";
+NET "do[3]" LOC = "P65";
+NET "do[2]" LOC = "P66";
+NET "do[1]" LOC = "P67";
+NET "do[0]" LOC = "P74";
